@@ -36,11 +36,17 @@ const MORSE_TABLE = {
     '----.':  '9',
     '-----':  '0',
 };
-
 function decode(expr) {
-    // write your solution here
-}
-
-module.exports = {
-    decode
-}
+    let letters = expr.split().join('').match(/.{1,10}/g).toString();
+    let numbersToMorse = letters
+      .replace(/11/g, '-').replace(/10/g, '.').replace(/0/g, '').split(',');
+    let result = numbersToMorse
+      .map((code) => code === '**********' ? code.replace('**********', ' ') : MORSE_TABLE[code])
+      .join('');
+  
+    return result;
+  }
+  
+  module.exports = {
+      decode
+  }
